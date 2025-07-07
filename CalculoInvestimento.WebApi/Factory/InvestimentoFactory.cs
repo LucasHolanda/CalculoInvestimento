@@ -1,7 +1,5 @@
 using CalculoInvestimento.Domain.Entities;
 using CalculoInvestimento.Domain.Enum;
-using CalculoInvestimento.Domain.Service;
-using CalculoInvestimento.Domain.Strategy;
 using CalculoInvestimento.WebApi.Factory;
 
 public class InvestimentoFactory : IInvestimentoFactory
@@ -20,13 +18,9 @@ public class InvestimentoFactory : IInvestimentoFactory
         switch (tipo)
         {
             case TipoInvestimento.Cdb:
-                var impostoStrategy = scope.ServiceProvider.GetRequiredService<IImpostoStrategy>();
-                var calculoCdbStrategy = scope.ServiceProvider.GetRequiredService<ICalcularCdbStrategy>();
-                var cdbTaxaProvider = scope.ServiceProvider.GetRequiredService<ICdbTaxaProvider>();
-
-                var (tb, cdi) = await cdbTaxaProvider.ObterTaxasAsync();
-                return new InvestimentoCdb(valor, prazoMeses, tb, cdi, impostoStrategy, calculoCdbStrategy);
-            // Adicionar outros tipos aqui, resolvendo suas estratégias específicas
+                var calcularInvestimentoCdb = scope.ServiceProvider.GetRequiredService<ICalcularInvestimentoCdb>();
+                return await calcularInvestimentoCdb.Calcular(valor, prazoMeses);
+            // Adicionar outros tipos aqui
             default:
                 throw new NotImplementedException();
         }

@@ -1,32 +1,47 @@
 using CalculoInvestimento.Domain.Entities;
+using CalculoInvestimento.Domain.Enum;
+using CalculoInvestimento.Domain.Strategy;
+using CalculoInvestimento.WebApi.Factory;
 using CalculoInvestimento.WebApi.Service;
 using FluentAssertions;
+using NSubstitute;
 
 public class CalcularCdbServiceTests
 {
+    private readonly IInvestimentoFactory investimentoFactory;
+    private readonly ICalcularCdbStrategy calcularCdbStrategy;
+    const decimal TB = 1.08m;
+    const decimal CDI = 0.009m;
+
+    public CalcularCdbServiceTests()
+    {
+        investimentoFactory = Substitute.For<IInvestimentoFactory>();
+        calcularCdbStrategy = new CalcularCdbStrategy();
+    }
+
     [Fact(DisplayName = "Service deve calcular corretamente o valor bruto e líquido do CDB")]
     public async Task Service_DeveCalcularCorretamenteValoresBrutoELiquido()
     {
         // Given
-        //var service = new CalcularCdbService();
-        //decimal valorInicial = 1000m;
-        //int prazoMeses = 12;
-        //const decimal TB = 1.08m;
-        //const decimal CDI = 0.009m;
-        //var investimentoResult = new InvestimentoCdb(valorInicial, prazoMeses, TB, CDI);
-        //await investimentoResult.CalcularCDBAsync();
+        decimal valorInicial = 1000m;
+        int prazoMeses = 12;
 
-        //// When
-        //var investimento = await service.CalcularAsync(valorInicial, prazoMeses);
+        var investimentoResult = new InvestimentoCdb(valorInicial, prazoMeses, TB, CDI, calcularCdbStrategy);
+        investimentoFactory.Criar(TipoInvestimento.Cdb, valorInicial, prazoMeses).Returns(investimentoResult);
+        var service = new CalcularCdbService(investimentoFactory);
+        investimentoResult.Calcular();
 
-        //// Then
-        //investimento.Should().NotBeNull();
+        // When
+        var investimento = await service.CalcularAsync(valorInicial, prazoMeses);
 
-        //investimento.ValorInicial.Should().Be(investimentoResult.ValorInicial);
-        //investimento.PrazoMeses.Should().Be(investimentoResult.PrazoMeses);
+        // Then
+        investimento.Should().NotBeNull();
 
+        investimento.ValorInicial.Should().Be(investimentoResult.ValorInicial);
+        investimento.PrazoMeses.Should().Be(investimentoResult.PrazoMeses);
 
-        //investimento.ValorBruto.Should().Be(investimentoResult.ValorBruto);
-        //investimento.ValorLiquido.Should().Be(investimentoResult.ValorLiquido);
+        investimento.ValorBruto.Should().Be(investimentoResult.ValorBruto);
+        investimento.ValorLiquido.Should().Be(investimentoResult.ValorLiquido);
+        await investimentoFactory.Received(1).Criar(TipoInvestimento.Cdb, valorInicial, prazoMeses);
     }
 }

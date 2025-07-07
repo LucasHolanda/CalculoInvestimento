@@ -1,0 +1,110 @@
+<div class="calculator-container">
+  <div class="header">
+    <h1>💰 Calculadora de Investimento</h1>
+    <p>Calcule o retorno do seu investimento de forma simples e rápida</p>
+  </div>
+
+  <div class="main-content">
+    <!-- Seção de Inputs -->
+    <div class="input-section">
+      <div class="card">
+        <h2>📊 Dados do Investimento</h2>
+        
+        <div class="form-group">
+          <label for="valor">Valor Inicial (R$)</label>
+          <input 
+            type="number" 
+            id="valor" 
+            [(ngModel)]="request.valor" 
+            placeholder="Digite o valor inicial"
+            min="0"
+            step="0.01"
+            class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="prazoMeses">Prazo (meses)</label>
+          <input 
+            type="number" 
+            id="prazoMeses" 
+            [(ngModel)]="request.prazoMeses" 
+            placeholder="Digite o prazo em meses"
+            min="1"
+            class="form-control">
+        </div>
+
+        <button 
+          (click)="calcularInvestimento()" 
+          [disabled]="loading || request.valor <= 0 || request.prazoMeses <= 0"
+          class="btn-calculate">
+          <span *ngIf="!loading">🚀 Calcular Investimento</span>
+          <span *ngIf="loading">⏳ Calculando...</span>
+        </button>
+
+        <div *ngIf="error" class="error-message">
+          ❌ {{ error }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção de Resultados -->
+    <div class="results-section" *ngIf="response">
+      <div class="card results-card">
+        <h2>📈 Resultados do Cálculo</h2>
+        
+        <!-- Resumo Principal -->
+        <div class="summary-grid">
+          <div class="summary-item primary">
+            <div class="summary-label">Valor Final Líquido</div>
+            <div class="summary-value">{{ formatarMoeda(response?.valorLiquido || 0) }}</div>
+          </div>
+          
+          <div class="summary-item">
+            <div class="summary-label">Rendimento Líquido</div>
+            <div class="summary-value positive">{{ formatarMoeda(response?.valorRendimentoLiquido || 0) }}</div>
+          </div>
+        </div>
+
+        <!-- Detalhamento -->
+        <div class="details-section">
+          <h3>📋 Detalhamento</h3>
+          
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Valor Inicial:</span>
+              <span class="detail-value">{{ formatarMoeda(response?.valorInicial || 0) }}</span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="detail-label">Valor Bruto:</span>
+              <span class="detail-value">{{ formatarMoeda(response?.valorBruto || 0) }}</span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="detail-label">Rendimento Bruto:</span>
+              <span class="detail-value positive">{{ formatarMoeda(response?.valorRendimentoBruto || 0) }}</span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="detail-label">Imposto ({{ formatarPercentual(response?.imposto || 0) }}):</span>
+              <span class="detail-value negative">-{{ formatarMoeda(response?.valorImposto || 0) }}</span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="detail-label">Prazo:</span>
+              <span class="detail-value">{{ response?.prazoMeses || 0 }} meses</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Informações Adicionais -->
+        <div class="additional-info">
+          <div class="info-item">
+            <span class="info-label">📅 Data do Cálculo:</span>
+            <span class="info-value">{{ formatarData(response?.dataCalculo || '') }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
