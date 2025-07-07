@@ -9,9 +9,9 @@ namespace CalculoInvestimento.WebApi.CalcularCdb
         private readonly ICalcularCdbService _calcularCdbService;
         private readonly IMapper _mapper;
 
-        public CalcularCdbHandler(ICalcularCdbService calcularCdbCacheService, IMapper mapper)
+        public CalcularCdbHandler(ICalcularCdbService calcularCdbService, IMapper mapper)
         {
-            _calcularCdbService = calcularCdbCacheService;
+            _calcularCdbService = calcularCdbService;
             _mapper = mapper;
         }
 

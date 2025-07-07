@@ -17,7 +17,7 @@ namespace CalculoInvestimento.WebApi.Service
         public async Task<InvestimentoCdb?> CalcularAsync(decimal valor, int prazoMeses)
         {            
             var investimento = (InvestimentoCdb) await _factory.Criar(TipoInvestimento.Cdb, valor, prazoMeses);
-            await investimento.CalcularCDBAsync();
+            investimento.Calcular();
             return investimento;
         }
     }
