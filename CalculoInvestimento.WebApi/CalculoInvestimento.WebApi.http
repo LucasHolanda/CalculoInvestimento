@@ -1,0 +1,6 @@
+@CalculoInvestimento.WebApi_HostAddress = http://localhost:5198
+
+GET {{CalculoInvestimento.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
