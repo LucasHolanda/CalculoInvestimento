@@ -2,7 +2,7 @@
 
 namespace CalculoInvestimento.Domain.Entities
 {
-    public class InvestimentoCdb: IInvestimento
+    public class InvestimentoCdb : IInvestimento
     {
         private readonly ICalcularCdbStrategy _calcularCdbStrategy;
 

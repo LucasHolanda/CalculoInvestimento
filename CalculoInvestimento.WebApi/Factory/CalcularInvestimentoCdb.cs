@@ -4,7 +4,7 @@ using CalculoInvestimento.Domain.Strategy;
 
 namespace CalculoInvestimento.WebApi.Factory
 {
-    public class CalcularInvestimentoCdb: ICalcularInvestimentoCdb
+    public class CalcularInvestimentoCdb : ICalcularInvestimentoCdb
     {
         private readonly ICalcularCdbStrategy _calcularCdbStrategy;
         private readonly ICdbTaxaProvider _cdbTaxaProvider;
