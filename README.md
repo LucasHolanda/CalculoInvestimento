@@ -99,6 +99,7 @@ docker-compose up --build
 
 O frontend estará disponível em:
 - **URL**: http://localhost:4200
+  
 O backend estará disponível em:
 - **URL**: http://localhost:5000
 - **Swagger**: https://localhost:5000/swagger
