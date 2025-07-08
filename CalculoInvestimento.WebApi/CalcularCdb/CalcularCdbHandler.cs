@@ -18,7 +18,7 @@ namespace CalculoInvestimento.WebApi.CalcularCdb
         public async Task<InvestimentoCdbDto> Handle(CalcularCdbCommand command, CancellationToken cancellationToken)
         {
             var investimentoCdb = await _calcularCdbService.CalcularAsync(command.Valor, command.PrazoMeses);
-            if(investimentoCdb == null)
+            if (investimentoCdb == null)
             {
                 throw new InvalidOperationException("Nao foi possivel calcular o CDB!");
             }

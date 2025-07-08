@@ -8,7 +8,7 @@ using NSubstitute;
 public class CalcularCdbCacheDecoratorTests
 {
     private readonly ICalcularCdbService _service;
-    private readonly ICalcularCdbStrategy calcularCdbStrategy;    
+    private readonly ICalcularCdbStrategy calcularCdbStrategy;
     const decimal TB = 1.08m;
     const decimal CDI = 0.009m;
 
