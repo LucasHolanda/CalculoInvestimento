@@ -1,0 +1,18 @@
+services:
+  webapi:
+    build:
+      context: .
+      dockerfile: CalculoInvestimento.WebApi/Dockerfile
+    container_name: calculoinvestimento_webapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "5000:8080"
+
+  frontend:
+    build:
+      context: ./CalculoInvestimentoFrontEnd
+      dockerfile: Dockerfile
+    container_name: calculoinvestimento_frontend
+    ports:
+      - "4200:80"

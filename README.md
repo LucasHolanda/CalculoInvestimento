@@ -71,8 +71,8 @@ dotnet run
 ```
 
 A API estará disponível em:
-- **URL**: https://localhost:7001 ou http://localhost:5000
-- **Swagger**: https://localhost:7001/swagger
+- **URL**: https://localhost:7247 ou http://localhost:5198
+- **Swagger**: https://localhost:7247/swagger
 
 ### 2. Frontend (Angular)
 
@@ -93,13 +93,15 @@ O frontend estará disponível em:
 ### 3. Execução com Docker
 
 ```bash
-# Executar apenas a API
-cd CalculoInvestimento.WebApi
-docker-compose up
-
-# Ou executar toda a solution
+# Executar toda a solution
 docker-compose up --build
 ```
+
+O frontend estará disponível em:
+- **URL**: http://localhost:4200
+O backend estará disponível em:
+- **URL**: http://localhost:5000
+- **Swagger**: https://localhost:5000/swagger
 
 ## 🧪 Executando Testes
 
@@ -109,10 +111,6 @@ dotnet test
 
 # Executar testes com cobertura
 dotnet test --collect:"XPlat Code Coverage"
-
-# Executar testes do frontend
-cd CalculoInvestimentoFrontEnd
-npm test
 ```
 
 ## 📡 API Endpoints
@@ -199,49 +197,5 @@ As taxas são configuradas através do `appsettings.json`:
   }
 }
 ```
-
-### CORS
-Configurado para permitir requisições do frontend Angular:
-- **Origem**: http://localhost:4200
-- **Métodos**: Todos os métodos HTTP
-- **Headers**: Todos os headers
-
-## 🚀 Deploy
-
-### Docker
-```bash
-# Build da imagem
-docker build -t calculo-investimento-api .
-
-# Executar container
-docker run -p 5000:8080 calculo-investimento-api
-```
-
-### Produção
-1. Build do frontend: `npm run build`
-2. Build da API: `dotnet publish -c Release`
-3. Configurar variáveis de ambiente
-4. Deploy em servidor web
-
-## 📝 Contribuição
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
-
-## 👥 Autores
-
-- Desenvolvido com Clean Architecture
-- Padrões de projeto modernos
-- Testes unitários abrangentes
-- Interface de usuário intuitiva
-
----
 
 **🎯 Objetivo**: Fornecer uma ferramenta completa e confiável para cálculo de investimentos em CDB, com interface moderna e API robusta. 

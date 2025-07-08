@@ -56,12 +56,12 @@
         <div class="summary-grid">
           <div class="summary-item primary">
             <div class="summary-label">Valor Final Líquido</div>
-            <div class="summary-value">{{ formatarMoeda(response?.valorLiquido || 0) }}</div>
+            <div class="summary-value">{{ formatarMoeda(response.valorLiquido || 0) }}</div>
           </div>
           
           <div class="summary-item">
             <div class="summary-label">Rendimento Líquido</div>
-            <div class="summary-value positive">{{ formatarMoeda(response?.valorRendimentoLiquido || 0) }}</div>
+            <div class="summary-value positive">{{ formatarMoeda(response.valorRendimentoLiquido || 0) }}</div>
           </div>
         </div>
 
@@ -72,27 +72,27 @@
           <div class="details-grid">
             <div class="detail-item">
               <span class="detail-label">Valor Inicial:</span>
-              <span class="detail-value">{{ formatarMoeda(response?.valorInicial || 0) }}</span>
+              <span class="detail-value">{{ formatarMoeda(response.valorInicial || 0) }}</span>
             </div>
             
             <div class="detail-item">
               <span class="detail-label">Valor Bruto:</span>
-              <span class="detail-value">{{ formatarMoeda(response?.valorBruto || 0) }}</span>
+              <span class="detail-value">{{ formatarMoeda(response.valorBruto || 0) }}</span>
             </div>
             
             <div class="detail-item">
               <span class="detail-label">Rendimento Bruto:</span>
-              <span class="detail-value positive">{{ formatarMoeda(response?.valorRendimentoBruto || 0) }}</span>
+              <span class="detail-value positive">{{ formatarMoeda(response.valorRendimentoBruto || 0) }}</span>
             </div>
             
             <div class="detail-item">
-              <span class="detail-label">Imposto ({{ formatarPercentual(response?.imposto || 0) }}):</span>
-              <span class="detail-value negative">-{{ formatarMoeda(response?.valorImposto || 0) }}</span>
+              <span class="detail-label">Imposto ({{ formatarPercentual(response.imposto || 0) }}):</span>
+              <span class="detail-value negative">-{{ formatarMoeda(response.valorImposto || 0) }}</span>
             </div>
             
             <div class="detail-item">
               <span class="detail-label">Prazo:</span>
-              <span class="detail-value">{{ response?.prazoMeses || 0 }} meses</span>
+              <span class="detail-value">{{ response.prazoMeses || 0 }} meses</span>
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@
         <div class="additional-info">
           <div class="info-item">
             <span class="info-label">📅 Data do Cálculo:</span>
-            <span class="info-value">{{ formatarData(response?.dataCalculo || '') }}</span>
+            <span class="info-value">{{ formatarData(response.dataCalculo || '') }}</span>
           </div>
         </div>
       </div>
