@@ -110,8 +110,18 @@ O backend estará disponível em:
 # Executar todos os testes
 dotnet test
 
-# Executar testes com cobertura
-dotnet test --collect:"XPlat Code Coverage"
+# Etapa 1 -  Executar testes com analise de cobertura gerando XML
+cd .\CalculoInvestimento.Tests.Unit
+dotnet test `
+  /p:CollectCoverage=true `
+  /p:CoverletOutput=.\coverage\coverage.cobertura.xml `
+  /p:CoverletOutputFormat=cobertura
+
+# Etapa 2 -  Gerar pagina HTML da analise de cobertura dos testes (necessario XML da etapa anterior)
+reportgenerator -reports:.\coverage\coverage.cobertura.xml -targetdir:coveragereport
+
+# Etapa 3 -  Abrir o arquivo HTML
+coveragereport\index.html
 ```
 
 ## 📡 API Endpoints
